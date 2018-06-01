@@ -41,6 +41,9 @@ router.post("/", (req, res) => {
   if ((!description, !name)) {
     sendError(400, "Must provide name and description", res);
     return;
+  } else if (description.length > 128 || name > 128) {
+    sendError(400, "Description and name can not exceed 128 characters", res);
+    return;
   }
   db
     .insert({ description, name })

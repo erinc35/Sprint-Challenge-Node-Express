@@ -21,9 +21,9 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  const { id } = req.params; // pull id off of req.params;
+  const { id } = req.params; 
   actionDb
-    .get(id) // invoke proper db.method(id) passing it the id.
+    .get(id) 
     .then(action => {
       if (action.length === 0) {
         sendError(404, `action with id ${id} could not found`, res);
@@ -41,6 +41,9 @@ router.post("/", (req, res) => {
   const { description, project_id } = req.body;
   if ((!description, !project_id)) {
     sendError(400, "Must provide description and project id", res);
+    return;
+  }else if(description.length > 128) {
+    sendError(400, "Description can not exceed 128 characters", res);
     return;
   }
   actionDb

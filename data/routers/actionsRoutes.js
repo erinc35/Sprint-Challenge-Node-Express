@@ -37,5 +37,25 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.post("/", (req, res) => {
+  const { description, project_id } = req.body;
+  if ((!description, !project_id)) {
+    sendError(400, "Must provide description and project id", res);
+    return;
+  }
+  actionDb
+    .insert(req.body)
+    .then(response => {
+      actionDb.get(response.id).then(action => {
+        res.json({ action });
+      });
+    })
+    .catch(error => {
+      console.log(error);
+      sendError(400, error, res);
+      return;
+    });
+});
+
 
 module.exports = router;

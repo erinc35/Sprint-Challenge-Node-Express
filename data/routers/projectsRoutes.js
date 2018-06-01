@@ -55,4 +55,56 @@ router.post("/", (req, res) => {
     });
 });
 
+
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  db
+    .remove(id)
+    .then(project => {
+      if (project === 0) {
+        sendError(
+          404,
+          `Project with id ${id} could not found, can not delete it.`,
+          res
+        );
+        return;
+      }
+      res.json({ project });
+    })
+    .catch(error => {
+      console.log(error);
+      sendError(500, "Error deleting project", res);
+      return;
+    });
+});
+
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const { description, name } = req.body;
+  if ((!description, !name)) {
+    sendError(400, "Must provide name and description", res);
+    return;
+  }
+  db
+    .update(id, req.body)
+    .then(response => {
+      if (response == 0) {
+        sendError(404, `Project with id ${id} could not found.`, res);
+        return;
+      }
+      db.get(id).then(project => {
+        console.log(project);
+        if (project.length === 0) {
+          sendError(404, `Project with id ${id} could not found.`, res);
+          return;
+        }
+        res.json({ project });
+      });
+    })
+    .catch(message => {
+      sendError(400, message, res);
+      return;
+    });
+});
+
 module.exports = router;

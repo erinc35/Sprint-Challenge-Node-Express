@@ -79,5 +79,34 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const { description } = req.body;
+  if (!description) {
+    sendError(400, "Must provide description", res);
+    return;
+  }
+  actionDb
+    .update(id, req.body)
+    .then(response => {
+      if (response == 0) {
+        sendError(404, `Action with id ${id} could not found.`, res);
+        return;
+      }
+      actionDb.get(id).then(action => {
+        console.log(action);
+        if (action.length === 0) {
+          sendError(404, `Action with id ${id} could not found.`, res);
+          return;
+        }
+        res.json({ action });
+      });
+    })
+    .catch(message => {
+      sendError(400, message, res);
+      return;
+    });
+});
+
 
 module.exports = router;

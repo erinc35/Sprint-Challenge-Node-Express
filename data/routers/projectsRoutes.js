@@ -36,6 +36,23 @@ router.get("/:id", (req, res) => {
     });
 });
 
-
+router.post("/", (req, res) => {
+  const { description, name } = req.body;
+  if ((!description, !name)) {
+    sendError(400, "Must provide name and description", res);
+    return;
+  }
+  db
+    .insert({ description, name })
+    .then(response => {
+      db.get(response.id).then(project => {
+        res.json({ project });
+      });
+    })
+    .catch(error => {
+      sendError(400, error, res);
+      return;
+    });
+});
 
 module.exports = router;

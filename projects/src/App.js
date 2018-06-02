@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from "axios";
-import { Route } from 'react-router-dom';
+import { Route } from "react-router-dom";
+import Projects from './Projects';
+
  
 
 class App extends Component {
@@ -21,9 +23,8 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.projects)
     return <div className="App">
-        {/* <Route exact path="/" render={props => <Projects {...props} projects={this.state.projects} />} /> */}
+        <Route exact path="/" render={props => <Projects {...props} projects={this.state.projects} />} />
       </div>;
   }
 }

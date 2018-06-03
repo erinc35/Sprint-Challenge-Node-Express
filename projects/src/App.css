@@ -32,12 +32,38 @@
 
 .card {
   width: 200px;
+  height: 300px;
+  overflow: scroll;
   box-shadow: 1px 1px 4px rgb(82, 83, 83);
-
+  background: #ffff80;
 }
+
+/* .card:hover {
+  text-decoration: none;
+} */
 
 .projects {
   display: flex;
   justify-content: space-around;
   width: 100%
+}
+
+.solo-card {
+  width: 100%;
+  box-shadow: 1px 1px 4px rgb(82, 83, 83);
+  background: #ffff80;
+  border-radius: 5px;
+}
+
+.actions {
+  text-decoration: underline
+}
+
+.home-btn {
+  float: right;
+}
+
+.project-link-wrap:hover {
+  text-decoration: none;
+  /* padding: 2%; */
 }

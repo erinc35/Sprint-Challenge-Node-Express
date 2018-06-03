@@ -4,6 +4,8 @@ import './App.css';
 import axios from "axios";
 import { Route } from "react-router-dom";
 import Projects from './Projects';
+import Project from "./Project";
+
 
  
 
@@ -25,6 +27,7 @@ class App extends Component {
   render() {
     return <div className="App">
         <Route exact path="/" render={props => <Projects {...props} projects={this.state.projects} />} />
+        <Route path='/projects/:id' component={Project} />
       </div>;
   }
 }

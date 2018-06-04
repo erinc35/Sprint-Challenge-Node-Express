@@ -25,7 +25,7 @@ class Project extends Component {
   }
 
   render() {
-      console.log(this.state.project.actions)
+      console.log(this.state.project.actions.length)
     return <div className="solo-card" key={this.state.project.id}>
         <div className="card-body text-center">
         <Link to='/'><button className='btn btn-info home-btn'>Home</button></Link>
@@ -33,16 +33,22 @@ class Project extends Component {
           <h3 className="card-title">{this.state.project.name}</h3>
           <p className="card-title">{this.state.project.description}</p>
           <p className='actions'><b>Actions:</b></p>
-          {this.state.project.actions.map(action => {
-            return <div key={action.id}>
-                <p>
-                  <b>Action #{action.id}</b>
-                </p>
-                <p>Description: {action.description}</p>
-                <p>Notes: {action.notes}</p>
-                <p>Completed: {action.completed}</p>
-              </div>;
-          })}
+          {this.state.project.actions.length === 0 ? 
+          (<p>No actions found for project </p>) : 
+          (this.state.project.actions.map(action => {
+              return(
+                    <div key={action.id}>
+                        <p>
+                        <b>Action #{action.id}</b>
+                        </p>
+                        <p>Description: {action.description}</p>
+                        <p>Notes: {action.notes}</p>
+                        <p>Completed: {action.completed}</p>
+                    </div>
+              )
+          }))
+        }
+        
         </div>
       </div>;
   }

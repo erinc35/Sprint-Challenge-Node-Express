@@ -5,11 +5,10 @@ class Projects extends Component {
 
 
     render() {
-        console.log(this.props.projects)
         return <div className='projects'>
             {this.props.projects.map(project => {
                 return(
-                    <Link to={`projects/${project.id}`} className='project-link-wrap'>
+                    <Link to={`projects/${project.id}`} className='project-link-wrap' key={project.id}>
                         <div className="card" key={project.id}>
                         <div className="card-body text-center">
                             <h4 className="card-title">{project.name}</h4>

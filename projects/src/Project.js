@@ -25,7 +25,6 @@ class Project extends Component {
   }
 
   render() {
-      console.log(this.state.project.actions.length)
     return <div className="solo-card" key={this.state.project.id}>
         <div className="card-body text-center">
         <Link to='/'><button className='btn btn-info home-btn'>Home</button></Link>
